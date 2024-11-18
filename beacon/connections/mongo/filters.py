@@ -938,7 +938,7 @@ def apply_alphanumeric_filter(self, query: dict, filter: AlphanumericFilter, col
                         age_in_number = age_in_number+char
                     except Exception:# pragma: no cover
                         continue
-                new_age_list=[]
+                new_age_list=''
                 
                 if "=" in filter.operator:
                     z = int(age_in_number)# pragma: no cover
@@ -946,10 +946,13 @@ def apply_alphanumeric_filter(self, query: dict, filter: AlphanumericFilter, col
                     z = int(age_in_number)+1
                 while z < 150:
                     newagechar="P"+str(z)+"Y"
-                    new_age_list.append(newagechar)
+                    if new_age_list == '':
+                        new_age_list+=newagechar
+                    else:
+                        new_age_list+='|'+newagechar
                     z+=1
                 dict_in={}
-                dict_in["$in"]=new_age_list
+                dict_in["$regex"]=new_age_list
                 query[filter.id] = dict_in
                 query=cross_query(self, query, scope, collection, {}, dataset)
             elif '<' in filter.operator:
@@ -960,17 +963,34 @@ def apply_alphanumeric_filter(self, query: dict, filter: AlphanumericFilter, col
                         age_in_number = age_in_number+char
                     except Exception:# pragma: no cover
                         continue
-                new_age_list=[]
+                new_age_list=''
                 if "=" in filter.operator:
                     z = int(age_in_number)# pragma: no cover
                 else:
                     z = int(age_in_number)-1
                 while z > 0:
                     newagechar="P"+str(z)+"Y"
-                    new_age_list.append(newagechar)
+                    if new_age_list == '':
+                        new_age_list+=newagechar
+                    else:
+                        new_age_list+='|'+newagechar
                     z-=1
                 dict_in={}
-                dict_in["$in"]=new_age_list
+                dict_in["$regex"]=new_age_list
+                query[filter.id] = dict_in
+                query=cross_query(self, query, scope, collection, {}, dataset)
+            elif '=' in filter.operator:
+                age_in_number=""
+                for char in filter.value:
+                    try:
+                        int(char)
+                        age_in_number = age_in_number+char
+                    except Exception:# pragma: no cover
+                        continue
+                z = int(age_in_number)# pragma: no cover
+                newagechar="P"+str(z)+"Y"
+                dict_in={}
+                dict_in["$regex"]=newagechar
                 query[filter.id] = dict_in
                 query=cross_query(self, query, scope, collection, {}, dataset)
         else:
