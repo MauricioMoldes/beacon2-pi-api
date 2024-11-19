@@ -220,7 +220,7 @@ def get_individuals_of_variant(self, entry_id: Optional[str], qparams: RequestPa
         query_parameters={}# pragma: no cover
     else:
         query=query_parameters
-    query = apply_filters(self, query, qparams.query.filters, collection,query_parameters, dataset)
+    collection='individuals'
     HGVSIds = client.beacon.genomicVariations \
         .find(query, {"identifiers.genomicHGVSId": 1, "datasetId": 1, "_id": 0})
     HGVSIds=list(HGVSIds)
