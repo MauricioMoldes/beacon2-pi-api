@@ -35,7 +35,7 @@ async def builder(self, request: Request, datasets, qparams, entry_type, entry_i
         complete_module='beacon.connections.'+source+'.executor'
         import importlib
         module = importlib.import_module(complete_module, package=None)
-        testMode = qparams.query.testMode
+        testMode = qparams.query.test_mode
         if testMode == True:
             datasets = ['test']
         datasets_docs, datasets_count, count, entity_schema, include, datasets = await module.execute_function(self, entry_type, datasets, qparams, entry_id)
