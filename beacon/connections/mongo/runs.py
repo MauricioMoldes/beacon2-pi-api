@@ -63,17 +63,13 @@ def get_variants_of_run(self, entry_id: Optional[str], qparams: RequestParams, d
         if bioid == run_ids["biosampleId"]:
             break
         position+=1
+    if position == len(bioids):
+        schema = DefaultSchemas.GENOMICVARIATIONS
+        return schema, 0, -1, None, dataset
     position=str(position)
-    position1="^"+position+","
-    position2=","+position+","
-    position3=","+position+"$"
-    query_cl={ "$or": [
-    {"biosampleIds": {"$regex": position1}}, 
-    {"biosampleIds": {"$regex": position2}},
-    {"biosampleIds": {"$regex": position3}}
-    ]}
+    query_cl={ position: "y", "datasetId": dataset}
     string_of_ids = client.beacon.caseLevelData \
-        .find(query_cl, {"id": 1, "_id": 0})
+        .find(query_cl, {"id": 1, "_id": 0}).limit(qparams.query.pagination.limit).skip(qparams.query.pagination.skip)
     HGVSIds=list(string_of_ids)
     query={}
     queryHGVS={}
