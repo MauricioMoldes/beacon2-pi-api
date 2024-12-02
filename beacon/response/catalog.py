@@ -317,7 +317,7 @@ def build_configuration(self):
                 'defaultGranularity': conf.default_beacon_granularity,
                 'securityLevels': conf.security_levels
             },
-            'entryTypes': entry_types
+            'entryTypes': entry_types['entryTypes']
         }
 
         configuration_json = {
