@@ -67,11 +67,11 @@ services:
 
   db:
     image: mongo:5
-    command: --wiredTigerCacheSizeGB 4 -port 27018
+    command: --wiredTigerCacheSizeGB 4
     hostname: mongo
     container_name: mongoprod
     ports:
-      - 27018:27017
+      - 27017:27017
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
