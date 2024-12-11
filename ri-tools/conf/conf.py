@@ -8,6 +8,7 @@ reference_genome='GRCh37' # Choose one between NCBI36, GRCh37, GRCh38
 datasetId='CINECA_synthetic_cohort_EUROPE_UK1'
 case_level_data=True
 num_rows=7000000
+population='Finnish'
 
 ### MongoDB parameters ###
 database_host = 'mongo'
