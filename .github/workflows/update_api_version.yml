@@ -2,7 +2,7 @@ name: update api version
 
 on:
   pull_request:
-    branches: ['main', 'api-version']
+    branches: ['*']
 
 jobs:
   updateapiversion:
