@@ -26,6 +26,8 @@ Edit the file `beacon/connections/mongo/conf.py` and set `database_certificate` 
 
 * The MongoDB client certificate should be in the combined PEM format `client.key + "\n" + client.crt`
 
+For more information and have a testing on TLS, please go to [mongoDB official documentation website](https://www.mongodb.com/docs/v7.1/appendix/security/appendixA-openssl-ca/).
+
 ## Prerequisites
 
 You should have installed:
