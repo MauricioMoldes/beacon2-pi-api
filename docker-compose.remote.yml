@@ -76,6 +76,16 @@ services:
       #- ./test-ca.pem:/test-ca.pem
       #- ./test-client.pem:/test-client.pem
     #command: --verbose
+  
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
 
   beacon-ri-tools:
     image: ghcr.io/ega-archive/beacon2-ri-tools-v2:latest
