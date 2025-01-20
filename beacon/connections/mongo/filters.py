@@ -394,7 +394,7 @@ def apply_filters(self, query: dict, filters: List[dict], collection: str, query
                 partial_query = apply_ontology_filter(self, partial_query, filter, collection, request_parameters, dataset)
             elif "similarity" in filter or "includeDescendantTerms" in filter or re.match(CURIE_REGEX, filter["id"]) and filter["id"].isupper():
                 filter = OntologyFilter(**filter)# pragma: no cover
-                partial_query = apply_ontology_filter(self, partial_query, filter, collection, request_parameters)# pragma: no cover
+                partial_query = apply_ontology_filter(self, partial_query, filter, collection, request_parameters, dataset)# pragma: no cover
             else:
                 filter = CustomFilter(**filter)
                 partial_query = apply_custom_filter(self, partial_query, filter, collection, dataset)
